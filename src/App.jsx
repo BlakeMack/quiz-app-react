@@ -12,7 +12,7 @@ function App() {
     fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
     .then(res => res.json())
     .then(data => setQuizData(data))
-    console.log(quizData)
+    console.log(quizData.results)
   }, [start])
 
   function startQuiz () {

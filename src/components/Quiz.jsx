@@ -1,17 +1,23 @@
+import Answer from './Answer'
 export default function Quiz (props) {
 
   const styles = {
     backgroundColor: props.isSelected ? "#D6DBF5" : "#F5F7FB"
 }
 
+  // on the app level, instead of passing down entire quizdata.answers, save answers in state and pass down answers to quiz component
+
+const answerElements = props.answers.map((a) => {
+  return (
+    <Answer value={a.answer} key={a.id} isSelected={a.isSelected} isCorrect={a.isCorrect} handleClick={props.selectAnswer}/>
+  )
+})
+
   return (
     <div className="quiz">
       <h3 className="quiz-question">{props.question}</h3>
       <div className="answers">
-        <button className="btn-answer" style={styles} onClick={props.select}>{props.answers[0].answer}</button>
-        <button className="btn-answer" style={styles} onClick={props.select}>{props.answers[1].answer}</button>
-        <button className="btn-answer" style={styles} onClick={props.select}>{props.answers[2].answer}</button>
-        <button className="btn-answer" style={styles} onClick={props.select}>{props.answers[3].answer}</button>
+        {answerElements}
       </div>
       <hr className="break-question"/>
     </div>

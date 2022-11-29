@@ -8,6 +8,7 @@ function App() {
   const [quizData, setQuizData] = useState(false)
   const [results, setResults] = useState([])
   const [selected, setSelected] = useState([])
+  const [answers, setAnswers] = useState(false)
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
@@ -38,27 +39,32 @@ function App() {
         ],
       }
       )
-    })));
+    }
+    )
+    )
+    )
+    setAnswers(quizData.answers)
   }, [start])
-
-
-  // Goal: implement the isselcted functionality to the quiz component
-  // method: add an iselected and iscorrect to each objects question
-  // consider the dice tenzies, for every die on page, there was a dice object, in this case there are multiple quiz objects containing questions
-  // consider adding an isselected to the quiz data state directly, if not in a seperate quiz question state
 
   function startQuiz () {
     setStart(true)
   }
 
-  function selectAnswer () {
-
+  function selectAnswer (id) {
+    console.log("select function ran onclick")
+    setQuizData(prevdata => prevdata.map((result) => {
+      return (
+        {...result, answers: answers.map((answer) => {
+          answer.id === id ? {...answer, isSelected: true} : answer
+        })}
+      )
+    }))
   }
 
   const quizElements = start && quizData && quizData.map((quiz, index) => {
     // let shuffledAnswers = quiz.answers.sort(() => Math.random() - 0.5);
     return (
-      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} isSelected={false}/>
+      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={() => selectAnswer(id)} />
     )
   });
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Start from './components/Start'
 import Quiz from './components/Quiz'
+import { nanoid } from 'nanoid'
 
 function App() {
   const [start, setStart] = useState(false)
@@ -20,21 +21,25 @@ function App() {
             answer: result.incorrect_answers[0],
             isSelected: false,
             isCorrect: false,
+            id: nanoid()
           },
           {
             answer: result.incorrect_answers[1],
             isSelected: false,
             isCorrect: false,
+            id: nanoid()
           },
           {
             answer: result.incorrect_answers[2],
             isSelected: false,
             isCorrect: false,
+            id: nanoid()
           },
           {
             answer: result.correct_answer,
             isSelected: false,
-            isCorrect: true
+            isCorrect: true,
+            id: nanoid()
           }
         ],
       }
@@ -54,9 +59,12 @@ function App() {
     console.log("select function ran onclick")
     setQuizData(prevdata => prevdata.map((result) => {
       return (
-        {...result, answers: answers.map((answer) => {
-          answer.id === id ? {...answer, isSelected: true} : answer
-        })}
+        {...result, answers: result.answers.map((answer) => {
+          return (
+            // if that array of answers already contains an isSelected, just return the object, else select
+            answer.id === id && !answer.isSelected ? {...answer, isSelected: true} : {...answer, isSelected: false}
+            )
+          })}
       )
     }))
   }
@@ -64,7 +72,7 @@ function App() {
   const quizElements = start && quizData && quizData.map((quiz, index) => {
     // let shuffledAnswers = quiz.answers.sort(() => Math.random() - 0.5);
     return (
-      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={() => selectAnswer(id)} />
+      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={selectAnswer} />
     )
   });
 

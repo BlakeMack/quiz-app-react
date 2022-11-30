@@ -5,6 +5,6 @@ export default function Answer (props) {
 }
 
   return (
-    <button className="btn-answer" style={styles} onClick={props.handleClick}>{props.value}</button>
+    <button className="btn-answer" style={styles} onClick={() => props.handleClick(props.id)}>{props.value}</button>
   )
 }

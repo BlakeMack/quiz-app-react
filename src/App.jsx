@@ -20,25 +20,25 @@ function App() {
           {
             answer: result.incorrect_answers[0],
             isSelected: false,
-            isCorrect: false,
+            isCorrect: "undetermined",
             id: nanoid()
           },
           {
             answer: result.incorrect_answers[1],
             isSelected: false,
-            isCorrect: false,
+            isCorrect: "undetermined",
             id: nanoid()
           },
           {
             answer: result.incorrect_answers[2],
             isSelected: false,
-            isCorrect: false,
+            isCorrect: "undetermined",
             id: nanoid()
           },
           {
             answer: result.correct_answer,
             isSelected: false,
-            isCorrect: true,
+            isCorrect: "undetermined",
             id: nanoid()
           }
         ],
@@ -81,14 +81,33 @@ function App() {
   }
 
   function checkAnswers () {
+    let score = 0
     quizData.map((result) => {
       console.log(result.answers.find(({isSelected}) => isSelected === true).answer)
       console.log(result.correct_answer)
       const selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer
       if (result.correct_answer === selectedAnswer) {
-        return console.log("Your selected answer was correct")
+        setQuizData(prevdata => prevdata.map((result) => {
+          return (
+            {...result, answers: result.answers.map((answer) => {
+              return (
+                answer.isSelected ? {...answer, isCorrect: true} : {...answer, isCorrect: "not chosen"}
+              )
+            })}
+          )
+        }));
+        console.log(result.answers)
       } else {
-        return console.log("Your selected answer was incorrect")
+        setQuizData(prevdata => prevdata.map((result) => {
+          return (
+            {...result, answers: result.answers.map((answer) => {
+              return (
+                answer.isSelected ? {...answer, isCorrect: false} : {...answer, isCorrect: "unchosen"}
+              )
+            })}
+          )
+        }));
+        console.log(result.answers)
       }
     })
   }

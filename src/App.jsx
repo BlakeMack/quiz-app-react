@@ -58,15 +58,39 @@ function App() {
   function selectAnswer (id) {
     console.log("select function ran onclick")
     setQuizData(prevdata => prevdata.map((result) => {
-      return (
-        {...result, answers: result.answers.map((answer) => {
-          return (
-            // if that array of answers already contains an isSelected, just return the object, else select
-            answer.id === id && !answer.isSelected ? {...answer, isSelected: true} : {...answer, isSelected: false}
-            )
-          })}
-      )
+      const selectedAnswers = result.answers.some(function(e) {
+        return e.id === id;
+    });
+      if (selectedAnswers) {
+        return (
+          {...result, answers:
+            result.answers.map((answer) => {
+            return (
+                answer.id === id ? {...answer, isSelected: true} : {...answer, isSelected: false}
+              // if that array of answers already contains an isSelected, just return the object, else select
+              )
+            })
+          }
+        )
+      } else {
+        return (
+          {...result}
+        )
+      }
     }))
+  }
+
+  function checkAnswers () {
+    quizData.map((result) => {
+      console.log(result.answers.find(({isSelected}) => isSelected === true).answer)
+      console.log(result.correct_answer)
+      const selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer
+      if (result.correct_answer === selectedAnswer) {
+        return console.log("Your selected answer was correct")
+      } else {
+        return console.log("Your selected answer was incorrect")
+      }
+    })
   }
 
   const quizElements = start && quizData && quizData.map((quiz, index) => {
@@ -86,7 +110,7 @@ function App() {
     <div className='App' style={styles}>
       {start ? quizElements : < Start handleClick={startQuiz}/>}
       { start && <div className='btn-container'>
-        <button className='btn-submit'>Check Answers</button>
+        <button className='btn-submit' onClick={checkAnswers}>Check Answers</button>
       </div>}
     </div>
   )

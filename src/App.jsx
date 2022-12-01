@@ -37,7 +37,7 @@ function App() {
             id: nanoid()
           },
           {
-            answer: result.correct_answer,
+            answer: decode(result.correct_answer),
             isSelected: false,
             isCorrect: "undetermined",
             id: nanoid()

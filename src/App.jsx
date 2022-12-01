@@ -3,33 +3,35 @@ import './App.css'
 import Start from './components/Start'
 import Quiz from './components/Quiz'
 import { nanoid } from 'nanoid'
+import {decode} from 'html-entities';
 
 function App() {
   const [start, setStart] = useState(false)
   const [quizData, setQuizData] = useState(false)
+  const [answers, setAnswers] = useState([])
   const [score, setScore] = useState(0)
   const [isScored, setIsScored] = useState(false)
 
-  useEffect(() => {
+  useEffect(() => { start &&
     fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => {
       return (
-        {...result, answers: [
+        {...result, question: decode(result.question), answers: [
           {
-            answer: result.incorrect_answers[0],
+            answer: decode(result.incorrect_answers[0]),
             isSelected: false,
             isCorrect: "undetermined",
             id: nanoid()
           },
           {
-            answer: result.incorrect_answers[1],
+            answer: decode(result.incorrect_answers[1]),
             isSelected: false,
             isCorrect: "undetermined",
             id: nanoid()
           },
           {
-            answer: result.incorrect_answers[2],
+            answer: decode(result.incorrect_answers[2]),
             isSelected: false,
             isCorrect: "undetermined",
             id: nanoid()
@@ -49,12 +51,6 @@ function App() {
     )
   }, [start])
 
-  useEffect(() => {
-    if (score) {
-      setIsScored(true)
-    }
-  }, [quizData])
-
   function startQuiz () {
     setStart(true)
   }
@@ -66,6 +62,7 @@ function App() {
         return e.id === id;
     });
       if (selectedAnswers) {
+        setAnswers(prevanswers => [...prevanswers, selectedAnswers])
         return (
           {...result, answers:
             result.answers.map((answer) => {
@@ -85,26 +82,31 @@ function App() {
 
   function checkAnswers() {
     console.log("checking answers....")
-    setQuizData(prevdata => prevdata.map((result) => {
-      let selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer;
-      console.log(selectedAnswer);
-      console.log(result.correct_answer);
-      console.log(selectedAnswer === result.correct_answer);
-      if (result.correct_answer === selectedAnswer) {
-        setScore(prevscore => prevscore + 0.5)
-        return {...result, answers: result.answers.map((answer) => {
-          return (
-            answer.isSelected ? {...answer, isCorrect: true} : {...answer, isCorrect: "not chosen"}
-          )
-        })}
-      } else {
-        return {...result, answers: result.answers.map((answer) => {
-          return (
-            answer.isSelected ? {...answer, isCorrect: false} : {...answer, isCorrect: "not chosen"}
-          )
-        })}
-      }
-    }));
+    if (answers.length === 10) {
+      setIsScored(true)
+      setQuizData(prevdata => prevdata.map((result) => {
+        let selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer;
+        console.log(selectedAnswer);
+        console.log(result.correct_answer);
+        console.log(selectedAnswer === result.correct_answer);
+        if (result.correct_answer === selectedAnswer) {
+          setScore(prevscore => prevscore + 0.5)
+          return {...result, answers: result.answers.map((answer) => {
+            return (
+              answer.isSelected ? {...answer, isCorrect: true} : {...answer, isCorrect: "not chosen"}
+            )
+          })}
+        } else {
+          return {...result, answers: result.answers.map((answer) => {
+            return (
+              answer.isSelected ? {...answer, isCorrect: false} : {...answer, isCorrect: "not chosen"}
+            )
+          })}
+        }
+      }));
+    } else {
+      console.log("You need to select all the answers first")
+    }
   }
 
 
@@ -140,9 +142,7 @@ function App() {
         <h1 className='score-counter'>You scored {score}/5 correct answers</h1>
       }
       { start && isScored &&
-      <div className='btn-container'>
-        <button className='btn-submit'>Play again</button>
-      </div>
+        <button className='btn-play' onClick={playAgain}>Play again</button>
     }
     </div>
     </div>

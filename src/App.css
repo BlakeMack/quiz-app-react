@@ -11,12 +11,13 @@ body {
   position: relative;
 }
 
-.background-paint-yellow {
-  position: absolute;
-  width: 297px;
-  height: 235px;
-  background-color: #FFFAD1;
-  top: 800px;
+.quizzical-title {
+  font-size: 62px;
+  font-family: 'Karla', sans-serif;
+}
+
+.quizzical-text {
+  font-size: 40px;
 }
 
 .background-paint-blue {
@@ -24,7 +25,20 @@ body {
   width: 297px;
   height: 235px;
   background-color: #DEEBF8;
-  left: 1800px;
+  top: 85%;
+  right: 92%;
+  border-radius: 45%;
+}
+
+.background-paint-yellow {
+  position: absolute;
+  width: 297px;
+  height: 235px;
+  background-color: #FFFAD1;
+  left: 92%;
+  bottom: 85%;
+  border-radius: 35%;
+  transform: rotate(45deg);
 }
 
 .start-quiz {
@@ -40,12 +54,13 @@ body {
 }
 
 .btn-start {
-  width: 193px;
-  height: 52px;
+  width: 350px;
+  height: 84px;
   border-radius: 15px;
   background-color: #4D5B9E;
   color: white;
   margin-top: 20px;
+  font-size: xx-large;
 }
 
 .quiz {

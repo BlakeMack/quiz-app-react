@@ -41,7 +41,7 @@ function App() {
             isCorrect: "undetermined",
             id: nanoid()
           }
-        ],
+        ].sort( () => .5 - Math.random() ),
       }
       )
     }

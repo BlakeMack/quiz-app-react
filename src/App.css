@@ -131,3 +131,53 @@ body {
   color: #293264;
   font-size: 1.5rem;
 }
+
+
+@media (max-width: 1980px) {
+  .answers {
+    min-width: 25%;
+    max-width: 65%;
+  }
+}
+
+@media (max-width: 1590px) {
+  .answers {
+    min-width: 25%;
+    max-width: 75%;
+  }
+}
+
+@media (max-width: 1435px) {
+  .answers {
+    min-width: 25%;
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .answers {
+    min-width: 25%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .quiz {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .btn-start {
+    width: 200px;
+    height: 50px;
+    font-size: large;
+  }
+  .quizzical-text {
+    font-size: 30px;
+  }
+  .quizzical-title {
+    font-size: 50px;
+  }
+}

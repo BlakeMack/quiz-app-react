@@ -1,3 +1,6 @@
+body {
+  background-color: #F5F7FB;
+}
 
 .App {
   margin: 0 auto;
@@ -5,6 +8,23 @@
   position: relative;
   font-family: 'Inter', sans-serif;
   background-color: #F5F7FB;
+  position: relative;
+}
+
+.background-paint-yellow {
+  position: absolute;
+  width: 297px;
+  height: 235px;
+  background-color: #FFFAD1;
+  top: 800px;
+}
+
+.background-paint-blue {
+  position: absolute;
+  width: 297px;
+  height: 235px;
+  background-color: #DEEBF8;
+  left: 1800px;
 }
 
 .start-quiz {

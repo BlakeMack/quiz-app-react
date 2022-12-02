@@ -3,12 +3,11 @@ import './App.css'
 import Start from './components/Start'
 import Quiz from './components/Quiz'
 import { nanoid } from 'nanoid'
-import {decode} from 'html-entities';
+import {decode} from 'html-entities'
 
 function App() {
   const [start, setStart] = useState(false)
   const [quizData, setQuizData] = useState(false)
-  const [answers, setAnswers] = useState([])
   const [score, setScore] = useState(0)
   const [isScored, setIsScored] = useState(false)
 
@@ -62,7 +61,6 @@ function App() {
         return e.id === id;
     });
       if (selectedAnswers) {
-        setAnswers(prevanswers => [...prevanswers, selectedAnswers])
         return (
           {...result, answers:
             result.answers.map((answer) => {
@@ -80,9 +78,21 @@ function App() {
     }))
   }
 
+  function checkSelected () {
+    let selectedAnswers = []
+    quizData.map((result) => {
+      let selectedAnswer = result.answers.find(({isSelected}) => isSelected === true);
+      if (selectedAnswer) {
+        selectedAnswers.push(selectedAnswer)
+      }
+    })
+    return (selectedAnswers.length === 5)
+  }
+
   function checkAnswers() {
     console.log("checking answers....")
-    if (answers.length === 10) {
+    console.log(checkSelected())
+    if (checkSelected()) {
       setIsScored(true)
       setQuizData(prevdata => prevdata.map((result) => {
         let selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer;

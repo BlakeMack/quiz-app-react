@@ -100,7 +100,7 @@ function App() {
         console.log(result.correct_answer);
         console.log(selectedAnswer === result.correct_answer);
         if (result.correct_answer === selectedAnswer) {
-          setScore(prevscore => prevscore + 0.5)
+          setScore(prevscore => prevscore + 1)
           return {...result, answers: result.answers.map((answer) => {
             return (
               answer.isSelected ? {...answer, isCorrect: true} : {...answer, isCorrect: "not chosen"}

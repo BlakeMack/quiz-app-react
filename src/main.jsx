@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>
 )
+
+// removed react strict mode to get setscore function not to run twice in development

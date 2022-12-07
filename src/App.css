@@ -11,6 +11,17 @@ body {
   position: relative;
 }
 
+.form-quiz {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 3px 4px rgb(0 0 0 / 10%);
+    padding: 4rem;
+}
+
+.form-option {
+  margin-bottom: 3rem;
+}
+
 .quizzical-title {
   font-size: 62px;
   font-family: 'Karla', sans-serif;

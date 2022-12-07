@@ -10,9 +10,60 @@ function App() {
   const [quizData, setQuizData] = useState(false)
   const [score, setScore] = useState(0)
   const [isScored, setIsScored] = useState(false)
+  const [formData, setFormData] = useState(
+    {
+        topic: "",
+        difficulty: ""
+    }
+  )
+
+  console.log(formData.topic)
+  console.log(formData.difficulty)
+
+  function findCategoryNumber(string) {
+    if (string === "General Knowledge") {
+      return 9
+    } else if (string === "Entertainment: Books") {
+      return 10
+    } else if (string === "Entertainment: Film") {
+      return 11
+    } else if (string === "Entertainment: Music") {
+      return 12
+    } else if (string === "Entertainment: Musicals and Theatres") {
+      return 13
+    } else if (string === "Entertainment: Television") {
+      return 14
+    } else if (string === "Entertainment: Video Games") {
+      return 15
+    } else if (string === "Entertainment: Board Games") {
+      return 16
+    } else if (string === "Science & Nature") {
+      return 17
+    } else if (string === "Science: Computers") {
+      return 18
+    } else if (string === "Science: Mathematics") {
+      return 19
+    }else if (string === "Mythology") {
+      return 20
+    } else if (string === "Sports") {
+      return 21
+    } else if (string === "Geography") {
+      return 22
+    } else if (string === "History") {
+      return 23
+    } else if (string === "Politics") {
+      return 24
+    } else if (string === "Art") {
+      return 25
+    } else if (string === "Celebrities") {
+      return 26
+    } else if (string === "Animals") {
+      return 27
+    }
+  }
 
   useEffect(() => { start &&
-    fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
+    fetch(`https://opentdb.com/api.php?amount=5&category=${findCategoryNumber(formData.topic)}&difficulty=${formData.difficulty}&type=multiple`)
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => {
       return (
@@ -49,6 +100,21 @@ function App() {
     )
     )
   }, [start])
+
+  function handleChange(event) {
+    console.log(event)
+    const {name, value, type, checked} = event.target
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }
+    })
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 
   function startQuiz () {
     setStart(true)
@@ -138,7 +204,7 @@ function App() {
     <div className='App' style={styles}>
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
-      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz}/>}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={formData}/>}
       { start && !isScored && <div className='btn-container'>
         <button className='btn-submit' onClick={checkAnswers}>Check Answers</button>
       </div>

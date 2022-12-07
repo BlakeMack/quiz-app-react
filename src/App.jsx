@@ -138,7 +138,7 @@ function App() {
     <div className='App' style={styles}>
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
-      {start ? quizElements : < Start handleClick={startQuiz}/>}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz}/>}
       { start && !isScored && <div className='btn-container'>
         <button className='btn-submit' onClick={checkAnswers}>Check Answers</button>
       </div>

@@ -63,6 +63,12 @@ body {
   font-size: xx-large;
 }
 
+.loading {
+  margin: 0 auto;
+  margin-bottom: 75px;
+  text-align: center;
+}
+
 .quiz {
   margin-left: 7rem;
   margin-right: 7rem;

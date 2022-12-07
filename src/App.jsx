@@ -55,7 +55,6 @@ function App() {
   }
 
   function selectAnswer (id) {
-    console.log("select function ran onclick")
     setQuizData(prevdata => prevdata.map((result) => {
       const selectedAnswers = result.answers.some(function(e) {
         return e.id === id;
@@ -90,15 +89,10 @@ function App() {
   }
 
   function checkAnswers() {
-    console.log("checking answers....")
-    console.log(checkSelected())
     if (checkSelected()) {
       setIsScored(true)
       setQuizData(prevdata => prevdata.map((result) => {
         let selectedAnswer = result.answers.find(({isSelected}) => isSelected === true).answer;
-        console.log(selectedAnswer);
-        console.log(result.correct_answer);
-        console.log(selectedAnswer === result.correct_answer);
         if (result.correct_answer === selectedAnswer) {
           setScore(prevscore => prevscore + 1)
           return {...result, answers: result.answers.map((answer) => {
@@ -115,7 +109,7 @@ function App() {
         }
       }));
     } else {
-      console.log("You need to select all the answers first")
+      alert("Please select all the answers first")
     }
   }
 

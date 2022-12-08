@@ -1,3 +1,5 @@
+
+
 export default function Start (props) {
   return (
   <div className="start-quiz">
@@ -41,7 +43,11 @@ export default function Start (props) {
           </select>
         </label>
       </div>
-
+      <div className="form-option">
+      <label htmlFor="amount">Number of questions (min 5 - max 50):
+        <input type="number" min={5} max={50} name="amount" id="amount" value={props.value.amount} onChange={props.handleChange} />
+      </label>
+      </div>
     </form>
 
     <button className="btn-start" onClick={props.handleClick}>Start Quiz</button>

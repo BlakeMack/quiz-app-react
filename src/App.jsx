@@ -5,6 +5,7 @@ import Quiz from './components/Quiz'
 import { nanoid } from 'nanoid'
 import {decode} from 'html-entities'
 
+
 function App() {
   const [start, setStart] = useState(false)
   const [quizData, setQuizData] = useState(false)
@@ -13,15 +14,17 @@ function App() {
   const [formData, setFormData] = useState(
     {
         topic: 9,
-        difficulty: "easy"
+        difficulty: "easy",
+        amount: 5
     }
   )
 
   console.log(formData.topic)
   console.log(formData.difficulty)
+  console.log(formData.amount)
 
   useEffect(() => { start &&
-    fetch(`https://opentdb.com/api.php?amount=5&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=${formData.amount}&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => {
       return (
@@ -169,7 +172,7 @@ function App() {
     }
     <div className='play-again'>
         { start && isScored &&
-        <h1 className='score-counter'>You scored {score}/5 correct answers</h1>
+        <h1 className='score-counter'>You scored {score}/{quizData.length} correct answers</h1>
       }
       { start && isScored &&
         <button className='btn-play' onClick={playAgain}>Play again</button>

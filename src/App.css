@@ -33,6 +33,11 @@ body {
   background-color: #F5F7FB;
 }
 
+#amount {
+  font-size: 20px;
+  background-color: #F5F7FB;
+}
+
 
 .quizzical-title {
   font-size: 62px;

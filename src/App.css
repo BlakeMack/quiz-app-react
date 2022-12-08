@@ -12,15 +12,27 @@ body {
 }
 
 .form-quiz {
-    background-color: #fff;
     border-radius: 1rem;
     box-shadow: 0 3px 4px rgb(0 0 0 / 10%);
-    padding: 4rem;
+    padding: 2rem;
+    text-align: left;
 }
 
 .form-option {
   margin-bottom: 3rem;
+  font-size: 25px;
 }
+
+#topic {
+  font-size: 20px;
+  background-color: #F5F7FB;
+}
+
+#difficulty {
+  font-size: 20px;
+  background-color: #F5F7FB;
+}
+
 
 .quizzical-title {
   font-size: 62px;

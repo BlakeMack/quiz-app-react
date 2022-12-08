@@ -12,58 +12,16 @@ function App() {
   const [isScored, setIsScored] = useState(false)
   const [formData, setFormData] = useState(
     {
-        topic: "",
-        difficulty: ""
+        topic: 9,
+        difficulty: "easy"
     }
   )
 
   console.log(formData.topic)
   console.log(formData.difficulty)
 
-  function findCategoryNumber(string) {
-    if (string === "General Knowledge") {
-      return 9
-    } else if (string === "Entertainment: Books") {
-      return 10
-    } else if (string === "Entertainment: Film") {
-      return 11
-    } else if (string === "Entertainment: Music") {
-      return 12
-    } else if (string === "Entertainment: Musicals and Theatres") {
-      return 13
-    } else if (string === "Entertainment: Television") {
-      return 14
-    } else if (string === "Entertainment: Video Games") {
-      return 15
-    } else if (string === "Entertainment: Board Games") {
-      return 16
-    } else if (string === "Science & Nature") {
-      return 17
-    } else if (string === "Science: Computers") {
-      return 18
-    } else if (string === "Science: Mathematics") {
-      return 19
-    }else if (string === "Mythology") {
-      return 20
-    } else if (string === "Sports") {
-      return 21
-    } else if (string === "Geography") {
-      return 22
-    } else if (string === "History") {
-      return 23
-    } else if (string === "Politics") {
-      return 24
-    } else if (string === "Art") {
-      return 25
-    } else if (string === "Celebrities") {
-      return 26
-    } else if (string === "Animals") {
-      return 27
-    }
-  }
-
   useEffect(() => { start &&
-    fetch(`https://opentdb.com/api.php?amount=5&category=${findCategoryNumber(formData.topic)}&difficulty=${formData.difficulty}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=5&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => {
       return (
@@ -151,7 +109,7 @@ function App() {
         selectedAnswers.push(selectedAnswer)
       }
     })
-    return (selectedAnswers.length === 5)
+    return (selectedAnswers.length === quizData.length)
   }
 
   function checkAnswers() {

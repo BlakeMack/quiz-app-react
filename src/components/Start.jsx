@@ -8,8 +8,7 @@ export default function Start (props) {
 
     <form onSubmit={props.handleSubmit} className="form-quiz">
       <div className="form-option">
-        <label htmlFor="topic">
-          Select the topic:
+        <label htmlFor="topic">Select the topic:</label>
           <select id="topic" value={props.value.topic} name="topic" onChange={props.handleChange}>
             <option value="9">General Knowledge</option>
             <option value="10">Entertainment: Books</option>
@@ -31,22 +30,18 @@ export default function Start (props) {
             <option value="26">Celebrities</option>
             <option value="27">Animals</option>
           </select>
-        </label>
       </div>
       <div className="form-option">
-        <label htmlFor="difficulty">
-          Select difficulty:
+        <label htmlFor="difficulty">Select difficulty:</label>
           <select id="difficulty" value={props.value.difficulty} name="difficulty" onChange={props.handleChange}>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-        </label>
       </div>
       <div className="form-option">
-      <label htmlFor="amount">Number of questions (min 5 - max 50):
+      <label htmlFor="amount">Number of questions (min 5 - max 50):</label>
         <input type="number" min={5} max={50} name="amount" id="amount" value={props.value.amount} onChange={props.handleChange} />
-      </label>
       </div>
     </form>
 

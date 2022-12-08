@@ -5,14 +5,26 @@ import Quiz from './components/Quiz'
 import { nanoid } from 'nanoid'
 import {decode} from 'html-entities'
 
+
 function App() {
   const [start, setStart] = useState(false)
   const [quizData, setQuizData] = useState(false)
   const [score, setScore] = useState(0)
   const [isScored, setIsScored] = useState(false)
+  const [formData, setFormData] = useState(
+    {
+        topic: 9,
+        difficulty: "easy",
+        amount: 5
+    }
+  )
+
+  console.log(formData.topic)
+  console.log(formData.difficulty)
+  console.log(formData.amount)
 
   useEffect(() => { start &&
-    fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
+    fetch(`https://opentdb.com/api.php?amount=${formData.amount}&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => {
       return (
@@ -50,6 +62,21 @@ function App() {
     )
   }, [start])
 
+  function handleChange(event) {
+    console.log(event)
+    const {name, value, type, checked} = event.target
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }
+    })
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
   function startQuiz () {
     setStart(true)
   }
@@ -85,7 +112,7 @@ function App() {
         selectedAnswers.push(selectedAnswer)
       }
     })
-    return (selectedAnswers.length === 5)
+    return (selectedAnswers.length === quizData.length)
   }
 
   function checkAnswers() {
@@ -138,14 +165,14 @@ function App() {
     <div className='App' style={styles}>
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
-      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz}/>}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={formData}/>}
       { start && !isScored && <div className='btn-container'>
         <button className='btn-submit' onClick={checkAnswers}>Check Answers</button>
       </div>
     }
     <div className='play-again'>
         { start && isScored &&
-        <h1 className='score-counter'>You scored {score}/5 correct answers</h1>
+        <h1 className='score-counter'>You scored {score}/{quizData.length} correct answers</h1>
       }
       { start && isScored &&
         <button className='btn-play' onClick={playAgain}>Play again</button>

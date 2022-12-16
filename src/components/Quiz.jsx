@@ -9,6 +9,7 @@ const answerElements = props.answers.map((a) => {
 
   return (
     <div className="quiz">
+        <h2 className='category-text'>{props.category}</h2>
       <h3 className="quiz-question">{props.question}</h3>
       <div className="answers">
         {answerElements}

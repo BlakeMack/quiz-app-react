@@ -151,7 +151,7 @@ function App() {
   const quizElements = start && quizData && quizData.map((quiz, index) => {
     // let shuffledAnswers = quiz.answers.sort(() => Math.random() - 0.5);
     return (
-      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={selectAnswer} />
+      <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={selectAnswer} category={quiz.category} />
     )
   });
 

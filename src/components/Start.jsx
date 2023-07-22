@@ -41,11 +41,10 @@ export default function Start (props) {
       </div>
       <div className="form-option">
       <label htmlFor="amount">Number of questions:</label>
-        <input type="number" min={5} max={50} name="amount" id="amount" value={props.value.amount} onChange={props.handleChange} />
+        <input type="number" min={5} max={20} name="amount" id="amount" value={props.value.amount} onChange={props.handleChange} />
       </div>
+      <button className="btn-start">Start Quiz</button>
     </form>
-
-    <button className="btn-start" onClick={props.handleClick}>Start Quiz</button>
   </div>
   )
 }

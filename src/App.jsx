@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Start from './components/Start'
 import Quiz from './components/Quiz'
+import CheckAnswers from './components/CheckAnswers'
+import PlayAgain from './components/PlayAgain'
 import { nanoid } from 'nanoid'
 import {decode} from 'html-entities'
 
@@ -73,6 +75,7 @@ function App() {
     })
   }
 
+  // determine why this handle submit is being used
   function handleSubmit(event) {
     event.preventDefault();
   }
@@ -149,13 +152,14 @@ function App() {
   }
 
   const quizElements = start && quizData && quizData.map((quiz, index) => {
-    // let shuffledAnswers = quiz.answers.sort(() => Math.random() - 0.5);
     return (
       <Quiz key={index} start={start} question={quiz.question} answers={quiz.answers} selectAnswer={selectAnswer} category={quiz.category} />
     )
   });
 
 
+  // no fixed height for the html elements rendered when the quiz is false
+  // a fixed height is added when the quiz has not started, which means the html form is being rendered
   const styles = {
     height: start ? "" : "1000px"
   };
@@ -165,19 +169,12 @@ function App() {
     <div className='App' style={styles}>
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
+      {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element. if the quiz has not started, render the start jsx component */}
       {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={formData}/>}
-      { start && !isScored && <div className='btn-container'>
-        <button className='btn-submit' onClick={checkAnswers}>Check Answers</button>
-      </div>
-    }
-    <div className='play-again'>
-        { start && isScored &&
-        <h1 className='score-counter'>You scored {score}/{quizData.length} correct answers</h1>
-      }
-      { start && isScored &&
-        <button className='btn-play' onClick={playAgain}>Play again</button>
-    }
-    </div>
+      {/* Render the CheckAnswers button component */}
+      {start && <CheckAnswers isScored={isScored} checkAnswers={checkAnswers} />}
+      {/* Render the PlayAgainSection component */}
+      <PlayAgain isScored={isScored} score={score} quizData={quizData} playAgain={playAgain} />
     </div>
   )
 }

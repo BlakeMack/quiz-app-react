@@ -28,9 +28,9 @@ function App() {
   useEffect(() => { start &&
     fetch(`https://opentdb.com/api.php?amount=${formData.amount}&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
     .then(res => res.json())
-    .then(data => setQuizData(data.results.map((result) => {
-      return (
-        {...result, question: decode(result.question), answers: [
+    .then(data => setQuizData(data.results.map((result) => ({
+        ...result,
+        question: decode(result.question), answers: [
           {
             answer: decode(result.incorrect_answers[0]),
             isSelected: false,
@@ -57,8 +57,7 @@ function App() {
           }
         ].sort( () => .5 - Math.random() ),
       }
-      )
-    }
+    )
     )
     )
     )

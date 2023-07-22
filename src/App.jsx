@@ -20,48 +20,67 @@ function App() {
         amount: 5
     }
   )
+  const [error, setError] = useState(null); // State for storing the error message
 
   console.log(quizFormData.topic)
   console.log(quizFormData.difficulty)
   console.log(quizFormData.amount)
 
-  useEffect(() => { start &&
-    fetch(`https://opentdb.com/api.php?amount=${quizFormData.amount}&category=${quizFormData.topic}&difficulty=${quizFormData.difficulty}&type=multiple`)
-    .then(res => res.json())
-    .then(data => setQuizData(data.results.map((result) => ({
-        ...result,
-        question: decode(result.question), answers: [
-          {
-            answer: decode(result.incorrect_answers[0]),
-            isSelected: false,
-            isCorrect: "undetermined",
-            id: nanoid()
-          },
-          {
-            answer: decode(result.incorrect_answers[1]),
-            isSelected: false,
-            isCorrect: "undetermined",
-            id: nanoid()
-          },
-          {
-            answer: decode(result.incorrect_answers[2]),
-            isSelected: false,
-            isCorrect: "undetermined",
-            id: nanoid()
-          },
-          {
-            answer: decode(result.correct_answer),
-            isSelected: false,
-            isCorrect: "undetermined",
-            id: nanoid()
+
+  useEffect(() => {
+    if (start) {
+      fetch(`https://opentdb.com/api.php?amount=${quizFormData.amount}&category=${quizFormData.topic}&difficulty=${quizFormData.difficulty}&type=multiple`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
           }
-        ].sort( () => .5 - Math.random() ),
-      }
-    )
-    )
-    )
-    )
-  }, [start])
+          return res.json();
+        })
+        .then((data) => {
+          if (data.results.length === 0) {
+            setError('No quiz data available for the selected criteria. Please refresh the page and try different settings.');
+            setQuizData([]); // Set an empty quiz data array
+          } else {
+            setQuizData(
+              data.results.map((result) => ({
+                ...result,
+                question: decode(result.question),
+                answers: [
+                  {
+                    answer: decode(result.incorrect_answers[0]),
+                    isSelected: false,
+                    isCorrect: "undetermined",
+                    id: nanoid()
+                  },
+                  {
+                    answer: decode(result.incorrect_answers[1]),
+                    isSelected: false,
+                    isCorrect: "undetermined",
+                    id: nanoid()
+                  },
+                  {
+                    answer: decode(result.incorrect_answers[2]),
+                    isSelected: false,
+                    isCorrect: "undetermined",
+                    id: nanoid()
+                  },
+                  {
+                    answer: decode(result.correct_answer),
+                    isSelected: false,
+                    isCorrect: "undetermined",
+                    id: nanoid()
+                  }
+                ].sort(() => 0.5 - Math.random()),
+              }))
+            );
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching quiz data:', error);
+          setError('Failed to fetch quiz data. Please try again later.');
+        });
+    }
+  }, [start]);
 
   function handleChange(event) {
     console.log(event)
@@ -165,7 +184,11 @@ function App() {
 
 
   return (
+
     <div className='App' style={styles}>
+      {/* Render the error message if there's an error */}
+      {error && <div className="error-message">{error}</div>}
+
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
       {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element. if the quiz has not started, render the start jsx component */}

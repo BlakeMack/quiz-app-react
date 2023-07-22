@@ -1,4 +1,4 @@
-
+import "./Start.css"
 
 export default function Start (props) {
   return (

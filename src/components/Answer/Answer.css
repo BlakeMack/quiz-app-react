@@ -1,0 +1,9 @@
+.btn-answer {
+  max-width: 16rem;
+  height: 2rem;
+  background-color: #F5F7FB;
+  border: 1px solid #293264;
+  border-radius: 8px;
+  color: #293264;
+  margin-right: 10px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import "./PlayAgain.css"
 
 const PlayAgain = ({ isScored, score, quizData, playAgain }) => {
   return (

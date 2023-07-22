@@ -26,7 +26,7 @@ function App() {
   console.log(quizFormData.difficulty)
   console.log(quizFormData.amount)
 
-
+  // generate quizdata from a get request made to the OTDB quiz api, using user submitted form data
   useEffect(() => {
     if (start) {
       fetch(`https://opentdb.com/api.php?amount=${quizFormData.amount}&category=${quizFormData.topic}&difficulty=${quizFormData.difficulty}&type=multiple`)
@@ -93,12 +93,10 @@ function App() {
     })
   }
 
-  // determine why this handle submit is being used
-  function handleSubmit(event) {
+  // prevent the page from refreshing if form submission is triggerred
+  // triggers the useffect to generate form data, by setting the start state to true
+  function handleQuizStart(event) {
     event.preventDefault();
-  }
-
-  function handleStartQuiz () {
     setStart(true)
   }
 
@@ -176,7 +174,7 @@ function App() {
   });
 
 
-  // no fixed height for the html elements rendered when the quiz is false
+  // no fixed height for the html elements rendered when the quiz information is rendered
   // a fixed height is added when the quiz has not started, which means the html form is being rendered
   const styles = {
     height: start ? "" : "1000px"
@@ -191,11 +189,10 @@ function App() {
 
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
-      {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element. if the quiz has not started, render the start jsx component */}
-      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={handleStartQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={quizFormData}/>}
-      {/* Render the CheckAnswers button component */}
+      {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element.
+      If the quiz has not started, render the start jsx component */}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleChange={handleChange} handleSubmit={handleQuizStart} value={quizFormData}/>}
       {start && <CheckAnswers isScored={isScored} checkAnswers={checkAnswers} />}
-      {/* Render the PlayAgainSection component */}
       <PlayAgain isScored={isScored} score={score} quizData={quizData} playAgain={playAgain} />
     </div>
   )

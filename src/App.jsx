@@ -13,7 +13,7 @@ function App() {
   const [quizData, setQuizData] = useState(false)
   const [score, setScore] = useState(0)
   const [isScored, setIsScored] = useState(false)
-  const [formData, setFormData] = useState(
+  const [quizFormData, setquizFormData] = useState(
     {
         topic: 9,
         difficulty: "easy",
@@ -21,12 +21,12 @@ function App() {
     }
   )
 
-  console.log(formData.topic)
-  console.log(formData.difficulty)
-  console.log(formData.amount)
+  console.log(quizFormData.topic)
+  console.log(quizFormData.difficulty)
+  console.log(quizFormData.amount)
 
   useEffect(() => { start &&
-    fetch(`https://opentdb.com/api.php?amount=${formData.amount}&category=${formData.topic}&difficulty=${formData.difficulty}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=${quizFormData.amount}&category=${quizFormData.topic}&difficulty=${quizFormData.difficulty}&type=multiple`)
     .then(res => res.json())
     .then(data => setQuizData(data.results.map((result) => ({
         ...result,
@@ -66,9 +66,9 @@ function App() {
   function handleChange(event) {
     console.log(event)
     const {name, value, type, checked} = event.target
-    setFormData(prevFormData => {
+    setquizFormData(prevquizFormData => {
         return {
-            ...prevFormData,
+            ...prevquizFormData,
             [name]: type === "checkbox" ? checked : value
         }
     })
@@ -79,11 +79,11 @@ function App() {
     event.preventDefault();
   }
 
-  function startQuiz () {
+  function handleStartQuiz () {
     setStart(true)
   }
 
-  function selectAnswer (id) {
+  function selectAnswer(id) {
     setQuizData(prevdata => prevdata.map((result) => {
       const selectedAnswers = result.answers.some(function(e) {
         return e.id === id;
@@ -169,7 +169,7 @@ function App() {
       <div className='background-paint-yellow'></div>
       <div className='background-paint-blue'></div>
       {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element. if the quiz has not started, render the start jsx component */}
-      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={startQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={formData}/>}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleClick={handleStartQuiz} handleChange={handleChange} handleSubmit={handleSubmit} value={quizFormData}/>}
       {/* Render the CheckAnswers button component */}
       {start && <CheckAnswers isScored={isScored} checkAnswers={checkAnswers} />}
       {/* Render the PlayAgainSection component */}

@@ -1,0 +1,22 @@
+
+.btn-play {
+  background-color: #4D5B9E;
+  color: white;
+  width: 11rem;
+  height: 5rem;
+  font-size: 1.25rem;
+  border-radius: 10px;
+}
+
+.play-again {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+}
+
+.score-counter {
+  color: #293264;
+  font-size: 1.5rem;
+}

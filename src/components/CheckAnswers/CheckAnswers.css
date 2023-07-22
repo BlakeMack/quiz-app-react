@@ -1,0 +1,15 @@
+.btn-container {
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.btn-submit {
+  background-color: #4D5B9E;
+  color: white;
+  width: 11rem;
+  height: 5rem;
+  font-size: 1.25rem;
+  border-radius: 10px;
+  margin: auto;
+}

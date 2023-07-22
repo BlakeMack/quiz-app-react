@@ -1,4 +1,5 @@
 import React from 'react';
+import "./CheckAnswers.css"
 
 const CheckAnswers = ({ isScored, checkAnswers }) => {
   return (

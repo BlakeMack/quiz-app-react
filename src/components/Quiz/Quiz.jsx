@@ -1,4 +1,6 @@
-import Answer from './Answer'
+import Answer from '../Answer/Answer'
+import "./Quiz.css"
+
 export default function Quiz (props) {
 
 const answerElements = props.answers.map((a) => {

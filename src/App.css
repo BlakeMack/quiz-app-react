@@ -12,25 +12,6 @@ body {
   overflow: hidden;
 }
 
-.form-quiz {
-    border-radius: 1rem;
-    box-shadow: 0 3px 4px rgb(0 0 0 / 10%);
-    padding: 2rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.form-option {
-  margin-bottom: 3rem;
-  font-size: 25px;
-}
-
-.form-option > label {
-  margin-right: 20px;
-}
-
 .error-message {
   color: red;
   font-size: 16px;
@@ -53,14 +34,9 @@ body {
 }
 
 
-.quizzical-title {
-  font-size: 62px;
-  font-family: 'Karla', sans-serif;
-}
 
-.quizzical-text {
-  font-size: 40px;
-}
+
+
 
 .background-paint-blue {
   position: absolute;
@@ -110,115 +86,6 @@ body {
   text-align: center;
 }
 
-.quiz {
-  margin-left: 7rem;
-  margin-right: 7rem;
-}
-
-.category-text {
-  display: inline;
-  background-color: #DEEBF8;
-}
-
-.quiz-question {
-  color: #293264;
-  font-family: 'Karla', sans-serif;
-  font-size: 2rem;
-}
-
-.answers {
-  min-width: 25%;
-  max-width: 50%;
-}
-
-.btn-answer {
-  max-width: 16rem;
-  height: 2rem;
-  background-color: #F5F7FB;
-  border: 1px solid #293264;
-  border-radius: 8px;
-  color: #293264;
-  margin-right: 10px;
-}
-
-.break-question {
-  margin-bottom: 50px;
-  margin-top: 40px;
-}
-
-.btn-container {
-  margin: auto;
-  display: flex;
-  align-items: center;
-}
-
-.btn-submit {
-  background-color: #4D5B9E;
-  color: white;
-  width: 11rem;
-  height: 5rem;
-  font-size: 1.25rem;
-  border-radius: 10px;
-  margin: auto;
-}
-
-.btn-play {
-  background-color: #4D5B9E;
-  color: white;
-  width: 11rem;
-  height: 5rem;
-  font-size: 1.25rem;
-  border-radius: 10px;
-}
-
-.play-again {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 50%;
-  margin: auto;
-}
-
-.score-counter {
-  color: #293264;
-  font-size: 1.5rem;
-}
-
-
-@media (max-width: 1980px) {
-  .answers {
-    min-width: 25%;
-    max-width: 65%;
-  }
-}
-
-@media (max-width: 1590px) {
-  .answers {
-    min-width: 25%;
-    max-width: 75%;
-  }
-}
-
-@media (max-width: 1435px) {
-  .answers {
-    min-width: 25%;
-    max-width: 85%;
-  }
-}
-
-@media (max-width: 1300px) {
-  .answers {
-    min-width: 25%;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 750px) {
-  .quiz {
-    margin-left: 0rem;
-    margin-right: 0rem;
-  }
-}
 
 @media (max-width: 300px) {
   .btn-start {

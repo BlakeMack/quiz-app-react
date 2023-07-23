@@ -1,5 +1,6 @@
 import React from 'react';
 import "./PlayAgain.css"
+import PropTypes from "prop-types"
 
 const PlayAgain = ({ isScored, score, quizData, playAgain }) => {
   return (
@@ -13,5 +14,11 @@ const PlayAgain = ({ isScored, score, quizData, playAgain }) => {
     </div>
   );
 };
+
+PlayAgain.PropTypes = {
+  isScored: PropTypes.bool,
+  score: PropTypes.number,
+  quizData: PropTypes.arrayOf(PropTypes.object)
+}
 
 export default PlayAgain;

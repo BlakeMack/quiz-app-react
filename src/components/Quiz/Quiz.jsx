@@ -2,7 +2,7 @@ import Answer from '../Answer/Answer'
 import "./Quiz.css"
 import PropTypes from "prop-types"
 
-function Quiz ({answers, selectAnswer, category, question}) {
+const Quiz = ({answers, selectAnswer, category, question}) => {
 
 const answerElements = answers.map((a) => {
   return (

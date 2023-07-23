@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Start from './components/Start/Start'
 import Quiz from './components/Quiz/Quiz'
 import CheckAnswers from './components/CheckAnswers/CheckAnswers'
 import PlayAgain from './components/PlayAgain/PlayAgain'
 import { nanoid } from 'nanoid'
 import {decode} from 'html-entities'
+import StartQuiz from './components/StartQuiz/StartQuiz'
 
 
-function App() {
+const App = () => {
   const [start, setStart] = useState(false)
   const [quizData, setQuizData] = useState(false)
   const [score, setScore] = useState(0)
@@ -191,7 +191,7 @@ function App() {
       <div className='background-paint-blue'></div>
       {/* if the quiz has started, evaluate the or expression. render quiz elements if they are available, if not render the loading quiz html element.
       If the quiz has not started, render the start jsx component */}
-      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < Start handleChange={handleChange} handleSubmit={handleQuizStart} quizData={quizFormData}/>}
+      {start ? quizElements || <h1 className='loading'>Loading Quiz...</h1> : < StartQuiz handleChange={handleChange} handleSubmit={handleQuizStart} quizData={quizFormData}/>}
       {start && <CheckAnswers isScored={isScored} checkAnswers={checkAnswers} />}
       <PlayAgain isScored={isScored} score={score} quizData={quizData} playAgain={playAgain} />
     </div>

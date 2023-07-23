@@ -1,7 +1,7 @@
 import "./Answer.css"
 import PropTypes from "prop-types"
 
- function Answer({ id, value, isCorrect, isSelected, handleClick }) {
+ const Answer = ({ id, value, isCorrect, isSelected, handleClick }) => {
 
   let backgroundColor;
   if (isSelected) {

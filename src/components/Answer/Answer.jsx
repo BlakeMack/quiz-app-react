@@ -1,7 +1,7 @@
 import "./Answer.css"
+import PropTypes from "prop-types"
 
-export default function Answer(props) {
-  const { id, value, isCorrect, isSelected, handleClick } = props;
+ function Answer({ id, value, isCorrect, isSelected, handleClick }) {
 
   let backgroundColor;
   if (isSelected) {
@@ -31,3 +31,13 @@ export default function Answer(props) {
     </button>
   );
 }
+
+Answer.PropTypes = {
+  id: PropTypes.string,
+  value: PropTypes.string,
+  isCorrect: PropTypes.bool,
+  isSelected: PropTypes.bool,
+  handleClick: PropTypes.func
+}
+
+export default Answer

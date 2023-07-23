@@ -1,18 +1,19 @@
 import Answer from '../Answer/Answer'
 import "./Quiz.css"
+import PropTypes from "prop-types"
 
-export default function Quiz (props) {
+function Quiz ({answers, selectAnswer, category, question}) {
 
-const answerElements = props.answers.map((a) => {
+const answerElements = answers.map((a) => {
   return (
-    <Answer value={a.answer} key={a.id} id={a.id} isSelected={a.isSelected} isCorrect={a.isCorrect} handleClick={props.selectAnswer}/>
+    <Answer value={a.answer} key={a.id} id={a.id} isSelected={a.isSelected} isCorrect={a.isCorrect} handleClick={selectAnswer}/>
   )
 })
 
   return (
     <div className="quiz">
-        <h2 className='category-text'>{props.category}</h2>
-      <h3 className="quiz-question">{props.question}</h3>
+        <h2 className='category-text'>{category}</h2>
+      <h3 className="quiz-question">{question}</h3>
       <div className="answers">
         {answerElements}
       </div>
@@ -20,3 +21,12 @@ const answerElements = props.answers.map((a) => {
     </div>
   )
 }
+
+Quiz.PropTypes = {
+  answers: PropTypes.arrayOf(PropTypes.object),
+  selectAnswer: PropTypes.func,
+  category: PropTypes.string,
+  question: PropTypes.string
+}
+
+export default Quiz

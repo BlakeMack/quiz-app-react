@@ -1,15 +1,16 @@
 import "./Start.css"
+import PropTypes from "prop-types"
 
-export default function Start (props) {
+function Start ({handleChange, handleSubmit, quizData}) {
   return (
   <div className="start-quiz">
     <h1 className="quizzical-title">Quizzical</h1>
     <p className="quizzical-text">Let's test your knowledge</p>
 
-    <form onSubmit={props.handleSubmit} className="form-quiz">
+    <form onSubmit={handleSubmit} className="form-quiz">
       <div className="form-option">
         <label htmlFor="topic">Select the topic:</label>
-          <select id="topic" value={props.value.topic} name="topic" onChange={props.handleChange}>
+          <select id="topic" value={quizData.topic} name="topic" onChange={handleChange}>
             <option value="9">General Knowledge</option>
             <option value="10">Entertainment: Books</option>
             <option value="11">Entertainment: Film</option>
@@ -33,7 +34,7 @@ export default function Start (props) {
       </div>
       <div className="form-option">
         <label htmlFor="difficulty">Select difficulty:</label>
-          <select id="difficulty" value={props.value.difficulty} name="difficulty" onChange={props.handleChange}>
+          <select id="difficulty" value={quizData.difficulty} name="difficulty" onChange={handleChange}>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
@@ -41,10 +42,19 @@ export default function Start (props) {
       </div>
       <div className="form-option">
       <label htmlFor="amount">Number of questions:</label>
-        <input type="number" min={5} max={20} name="amount" id="amount" value={props.value.amount} onChange={props.handleChange} />
+        <input type="number" min={5} max={20} name="amount" id="amount" value={quizData.amount} onChange={handleChange} />
       </div>
       <button className="btn-start">Start Quiz</button>
     </form>
   </div>
   )
 }
+
+Start.PropTypes = {
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  quizData: PropTypes.object
+}
+
+
+export default Start

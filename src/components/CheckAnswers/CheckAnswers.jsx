@@ -1,5 +1,6 @@
 import React from 'react';
 import "./CheckAnswers.css"
+import PropTypes from "prop-types"
 
 const CheckAnswers = ({ isScored, checkAnswers }) => {
   return (
@@ -8,5 +9,10 @@ const CheckAnswers = ({ isScored, checkAnswers }) => {
     </div>
   );
 };
+
+CheckAnswers.PropTypes = {
+  isScored: PropTypes.bool,
+  checkAnswers: PropTypes.func
+}
 
 export default CheckAnswers;

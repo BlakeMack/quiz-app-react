@@ -1,4 +1,4 @@
-import "./Start.css"
+import "./StartQuiz.css"
 import PropTypes from "prop-types"
 
 const StartQuiz = ({handleChange, handleSubmit, quizData}) => {

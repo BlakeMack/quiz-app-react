@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Start from './components/StartQuiz/Start'
 import Quiz from './components/Quiz/Quiz'
 import CheckAnswers from './components/CheckAnswers/CheckAnswers'
 import PlayAgain from './components/PlayAgain/PlayAgain'
 import { nanoid } from 'nanoid'
 import {decode} from 'html-entities'
-import StartQuiz from './components/StartQuiz/Start'
+import StartQuiz from './components/StartQuiz/StartQuiz'
 
 
 const App = () => {

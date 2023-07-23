@@ -1,7 +1,7 @@
 import "./Start.css"
 import PropTypes from "prop-types"
 
-function Start ({handleChange, handleSubmit, quizData}) {
+const StartQuiz = ({handleChange, handleSubmit, quizData}) => {
   return (
   <div className="start-quiz">
     <h1 className="quizzical-title">Quizzical</h1>
@@ -50,11 +50,11 @@ function Start ({handleChange, handleSubmit, quizData}) {
   )
 }
 
-Start.PropTypes = {
+StartQuiz.PropTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   quizData: PropTypes.object
 }
 
 
-export default Start
+export default StartQuiz

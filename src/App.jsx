@@ -22,10 +22,6 @@ const App = () => {
   )
   const [error, setError] = useState(null); // State for storing the error message
 
-  console.log(quizFormData.topic)
-  console.log(quizFormData.difficulty)
-  console.log(quizFormData.amount)
-
   // generate quizdata from a get request made to the OTDB quiz api, using user submitted form data
   useEffect(() => {
     if (start) {
